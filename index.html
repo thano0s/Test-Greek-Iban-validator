@@ -1,2 +1,31 @@
-<h1> Έλεγχος εγκυρότητας IBAN</h1>
-<p>Δώσε το IBAN<input type="text"><button onclick="">validate</button></p>
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <title>Έλεγχος Εγκυρότητας IBAN</title>
+</head>
+<body>
+    <h1>Έλεγχος Εγκυρότητας IBAN</h1>
+    <p>Εισάγετε τον αριθμό IBAN για να ελέγξετε την εγκυρότητά του.</p>
+
+    <input type="text" id="ibanInput" placeholder="Εισάγετε IBAN" keyup()>
+    <button onclick="validateIBAN()">Έλεγχος</button>
+    <div id="result"></div>
+
+    <script src="js/iban.js"></script>
+    <script>
+        function validateIBAN() {
+            const iban = document.getElementById('ibanInput').value;
+            const resultDiv = document.getElementById('result');
+
+            resultDiv.textContent = '';
+
+            if (IBAN.isValid(iban)) {
+                resultDiv.textContent = 'Το IBAN είναι έγκυρο.';
+                
+               } else {
+                resultDiv.textContent = 'Το IBAN δεν είναι έγκυρο.';
+            }
+        }
+    </script>
+</body>
+</html>
