@@ -20,13 +20,16 @@
 
             result.textContent = '';
 
-            if (IBAN.isValid(iban)) {
+            if(iban == ""){
+                result.textContent = 'Το IBAN είναι adeio.';
+            } else if (IBAN.isValid(iban)) {
                 result.textContent = 'Το IBAN είναι έγκυρο.';
                 
                } else {
                 result.textContent = 'Το IBAN δεν είναι έγκυρο.';
             }
         }
+            
     </script>
 </body>
 </html>
