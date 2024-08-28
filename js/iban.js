@@ -36,7 +36,7 @@
                 //       but more portable alternative.
                 if (i in t)
                     res[i] = fun.call(thisArg, t[i], i, t);
-            }
+            }       
 
             return res;
         };

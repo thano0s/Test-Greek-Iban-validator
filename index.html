@@ -1,16 +1,108 @@
 <!DOCTYPE html>
-<html lang="el">
 <head>
-    <link rel="icon" href ="images/eurobankLogo-removebg-preview.png" type = "image/x-icon" >
+    <link rel="icon" href="images/eurobankLogo-removebg-preview.png" type="image/x-icon">
     <title>Έλεγχος Εγκυρότητας IBAN</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            margin: 20px;
+        }
+
+        h1 {
+            font-size: 26px;
+            color: #444;
+            margin-bottom: 20px;
+            font-weight: 650;
+        }
+
+        p {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 15px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: translateY(-5px);
+        }
+
+        #result {
+            font-size: 15px;
+            margin-top: 25px;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .valid {
+            color: green;
+            background-color: #c3e6cb;
+            border: 1px solid #c3e6cb;
+        }
+
+        .invalid {
+            color: red;
+            background-color: #f5c6cb;
+            border: 1px solid #f5c6cb;
+        }
+
+        .empty {
+            color: orange;
+            background-color: #ffeeba;
+            border: 1px solid #ffeeba;
+        }
+    </style>
 </head>
 <body>
-    <h1>Έλεγχος Εγκυρότητας IBAN</h1>
-    <p>Εισάγετε τον αριθμό IBAN για να ελέγξετε την εγκυρότητά του.</p>
+    <div class="container">
+        <h1>Έλεγχος Εγκυρότητας IBAN</h1>
+        <p>Εισάγετε τον αριθμό IBAN για να ελέγξετε την εγκυρότητά του.</p>
 
-    <input type="text" id="iban" placeholder="Εισάγετε IBAN" keyup()>
-    <button onclick="validateIBAN()">Έλεγχος</button>
-    <div id="result"></div>
+        <input type="text" id="iban" placeholder="Εισάγετε IBAN">
+        <button onclick="validateIBAN()">Έλεγχος</button>
+        <div id="result"></div>
+    </div>
 
     <script src="js/iban.js"></script>
     <script>
@@ -18,17 +110,19 @@
             const iban = document.getElementById('iban').value;
             const result = document.getElementById('result');
             result.textContent = '';
+            result.className = '';
 
-            if(iban == ""){
-                result.textContent = 'Το IBAN είναι adeio.';
+            if (iban === "") {
+                result.textContent = 'Το IBAN είναι άδειο.';
+                result.classList.add('empty');
             } else if (IBAN.isValid(iban)) {
                 result.textContent = 'Το IBAN είναι έγκυρο.';
-                
-               } else {
+                result.classList.add('valid');
+            } else {
                 result.textContent = 'Το IBAN δεν είναι έγκυρο.';
+                result.classList.add('invalid');
             }
         }
-            
     </script>
 </body>
 </html>
