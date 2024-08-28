@@ -7,23 +7,23 @@
     <h1>Έλεγχος Εγκυρότητας IBAN</h1>
     <p>Εισάγετε τον αριθμό IBAN για να ελέγξετε την εγκυρότητά του.</p>
 
-    <input type="text" id="ibanInput" placeholder="Εισάγετε IBAN" keyup()>
+    <input type="text" id="iban" placeholder="Εισάγετε IBAN" keyup()>
     <button onclick="validateIBAN()">Έλεγχος</button>
     <div id="result"></div>
 
     <script src="js/iban.js"></script>
     <script>
         function validateIBAN() {
-            const iban = document.getElementById('ibanInput').value;
-            const resultDiv = document.getElementById('result');
+            const iban = document.getElementById('iban').value;
+            const result = document.getElementById('result');
 
-            resultDiv.textContent = '';
+            result.textContent = '';
 
             if (IBAN.isValid(iban)) {
-                resultDiv.textContent = 'Το IBAN είναι έγκυρο.';
+                result.textContent = 'Το IBAN είναι έγκυρο.';
                 
                } else {
-                resultDiv.textContent = 'Το IBAN δεν είναι έγκυρο.';
+                result.textContent = 'Το IBAN δεν είναι έγκυρο.';
             }
         }
     </script>
