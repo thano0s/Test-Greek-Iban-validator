@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-    <link rel="icon" href="images/eurobankLogo-removebg-preview.png" type="image/x-icon">
+    <link rel="icon" href="images/tc.png" type="image/x-icon">
     <title>Έλεγχος Εγκυρότητας IBAN</title>
     <style>
         body {
@@ -12,6 +12,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            overflow: hidden; /* Hide scrollbar */
         }
 
         .container {
@@ -22,6 +23,9 @@
             max-width: 400px;
             width: 100%;
             margin: 20px;
+            z-index: 1;
+            position: relative; /* To make sure the container is above other elements */
+            transition: opacity 3s ease; /* Transition for fading in and out */
         }
 
         h1 {
@@ -88,10 +92,19 @@
             border: 1px solid #f5c6cb;
         }
 
-        .empty {
-            color: orange;
-            background-color: #ffeeba;
-            border: 1px solid #ffeeba;
+
+        #full-screen-logo {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            opacity: 0; /* Start with the logo hidden */
+            visibility: hidden; /* Hide the logo initially */
+            transition: opacity 2s ease, visibility 2s ease; /* Smooth transition for opacity and visibility */
+            z-index: 0; /* Ensure it is behind the container initially */
         }
     </style>
 </head>
@@ -105,25 +118,85 @@
         <div id="result"></div>
     </div>
 
+    <div id="full-screen-logo"></div>
+
     <script src="js/iban.js"></script>
     <script>
         function validateIBAN() {
             const iban = document.getElementById('iban').value;
             const result = document.getElementById('result');
+            const fullScreenLogo = document.getElementById('full-screen-logo');
             result.textContent = '';
             result.className = '';
+            fullScreenLogo.style.backgroundImage = 'none'; // Reset background image
+            
 
+            // Check if IBAN is empty
             if (iban === "") {
                 result.textContent = '';
                 result.className = '';
-            } else if (IBAN.isValid(iban)) {
-                result.textContent = 'Το IBAN είναι έγκυρο.';
-                result.classList.add('valid');
-            } else {
+                fullScreenLogo.style.opacity = '0'; // Hide the full-screen logo
+                fullScreenLogo.style.visibility = 'hidden'; // Hide the full-screen logo
+                document.querySelector('.container').style.opacity = '1'; // Show the container
+                return;
+            }
+
+            // Validate IBAN
+            if (!IBAN.isValid(iban)) {
                 result.textContent = 'Το IBAN δεν είναι έγκυρο.';
                 result.classList.add('invalid');
+                fullScreenLogo.style.opacity = '0'; // Hide the full-screen logo
+                fullScreenLogo.style.visibility = 'hidden'; // Hide the full-screen logo
+                document.querySelector('.container').style.opacity = '1'; // Show the container
+                return;
             }
+
+
+            const bankIdentifier = iban.substring(4, 7); 
+
+            let bankName = '';
+            let logoPath = '';
+
+            switch (bankIdentifier) {
+                case '014':
+                    bankName = 'Alpha Bank';
+                    logoPath = 'images/alphaBankLogo.png';
+                    break;
+                case '011':
+                    bankName = 'National Bank of Greece (NBG)';
+                    logoPath = 'images/nationalBankLogo.png';
+                    break;
+                case '017':
+                    bankName = 'Piraeus Bank';
+                    logoPath = 'images/piraeusBankLogo.png';
+                    break;
+                case '026':
+                    bankName = 'Eurobank';
+                    logoPath = 'images/eurobankLogo.png';
+                    break;
+                default:
+                    bankName = 'Αναγνωρίστηκε αλλά δεν αναγνωρίζεται ο τραπεζικός κωδικός.';
+                    logoPath = '';
+                    break;
+            }
+
+
+            if (bankName) {
+                result.textContent = `Το IBAN είναι έγκυρο και ανήκει στην ${bankName}.`;
+                result.classList.add('valid');
+                fullScreenLogo.style.backgroundImage = `url(${logoPath})`; 
+                fullScreenLogo.style.opacity = '1'; 
+                fullScreenLogo.style.visibility = 'visible'; 
+                document.querySelector('.container').style.opacity = '0';
+
+                setTimeout(() => {
+                    fullScreenLogo.style.opacity = '0';
+                    fullScreenLogo.style.visibility = 'hidden';
+                    document.querySelector('.container').style.opacity = '1';
+                    document.getElementById('iban').value = '';
+                }, 3000);}
         }
+
 
         document.getElementById('iban').addEventListener('keypress', function(event) {
             if (event.key === 'Enter') {
@@ -137,6 +210,9 @@
             if (iban === "") {
                 result.textContent = '';
                 result.className = '';
+                document.getElementById('full-screen-logo').style.opacity = '0';
+                document.getElementById('full-screen-logo').style.visibility = 'hidden';
+                document.querySelector('.container').style.opacity = '1';
             }
         });
     </script>
