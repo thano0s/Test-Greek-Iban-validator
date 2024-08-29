@@ -12,7 +12,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            overflow: hidden; /* Hide scrollbar */
+            overflow: hidden;
         }
 
         .container {
@@ -24,8 +24,8 @@
             width: 100%;
             margin: 20px;
             z-index: 1;
-            position: relative; /* To make sure the container is above other elements */
-            transition: opacity 3s ease; /* Transition for fading in and out */
+            position: relative; 
+            transition: opacity 3s ease;
         }
 
         h1 {
@@ -101,10 +101,10 @@
             height: 100vh;
             background-size: cover;
             background-position: center;
-            opacity: 0; /* Start with the logo hidden */
-            visibility: hidden; /* Hide the logo initially */
-            transition: opacity 2s ease, visibility 2s ease; /* Smooth transition for opacity and visibility */
-            z-index: 0; /* Ensure it is behind the container initially */
+            opacity: 0; 
+            visibility: hidden; 
+            transition: opacity 2s ease, visibility 2s ease;
+            z-index: 0; 
         }
     </style>
 </head>
@@ -128,26 +128,24 @@
             const fullScreenLogo = document.getElementById('full-screen-logo');
             result.textContent = '';
             result.className = '';
-            fullScreenLogo.style.backgroundImage = 'none'; // Reset background image
+            fullScreenLogo.style.backgroundImage = 'none';
             
 
-            // Check if IBAN is empty
             if (iban === "") {
                 result.textContent = '';
                 result.className = '';
-                fullScreenLogo.style.opacity = '0'; // Hide the full-screen logo
-                fullScreenLogo.style.visibility = 'hidden'; // Hide the full-screen logo
-                document.querySelector('.container').style.opacity = '1'; // Show the container
+                fullScreenLogo.style.opacity = '0';
+                fullScreenLogo.style.visibility = 'hidden';
+                document.querySelector('.container').style.opacity = '1';
                 return;
             }
 
-            // Validate IBAN
             if (!IBAN.isValid(iban)) {
                 result.textContent = 'Το IBAN δεν είναι έγκυρο.';
                 result.classList.add('invalid');
-                fullScreenLogo.style.opacity = '0'; // Hide the full-screen logo
-                fullScreenLogo.style.visibility = 'hidden'; // Hide the full-screen logo
-                document.querySelector('.container').style.opacity = '1'; // Show the container
+                fullScreenLogo.style.opacity = '0';
+                fullScreenLogo.style.visibility = 'hidden';
+                document.querySelector('.container').style.opacity = '1';
                 return;
             }
 
