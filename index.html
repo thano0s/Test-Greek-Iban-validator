@@ -92,7 +92,6 @@
             border: 1px solid #f5c6cb;
         }
 
-
         #full-screen-logo {
             position: fixed;
             top: 0;
@@ -113,7 +112,7 @@
         <h1>Έλεγχος Εγκυρότητας IBAN</h1>
         <p>Εισάγετε τον αριθμό IBAN για να ελέγξετε την εγκυρότητά του.</p>
 
-        <input type="text" id="iban" placeholder="Εισάγετε IBAN" maxlength="27">
+        <input type="text" id="iban" placeholder="Εισάγετε IBAN">
         <button onclick="validateIBAN()">Έλεγχος</button>
         <div id="result"></div>
     </div>
@@ -123,13 +122,13 @@
     <script src="js/iban.js"></script>
     <script>
         function validateIBAN() {
-            const iban = document.getElementById('iban').value;
+            let iban = document.getElementById('iban').value;
+            iban = iban.replace(/\s+/g, '');  // Remove all spaces
             const result = document.getElementById('result');
             const fullScreenLogo = document.getElementById('full-screen-logo');
             result.textContent = '';
             result.className = '';
             fullScreenLogo.style.backgroundImage = 'none';
-            
 
             if (iban === "") {
                 result.textContent = '';
@@ -148,7 +147,6 @@
                 document.querySelector('.container').style.opacity = '1';
                 return;
             }
-
 
             const bankIdentifier = iban.substring(4, 7); 
 
@@ -175,9 +173,8 @@
                 default:
                     bankName = 'Αναγνωρίστηκε αλλά δεν αναγνωρίζεται ο τραπεζικός κωδικός.';
                     logoPath = '';
-                    break;
+                    break;  
             }
-
 
             if (bankName) {
                 result.textContent = `Το IBAN είναι έγκυρο και ανήκει στην ${bankName}.`;
@@ -192,9 +189,9 @@
                     fullScreenLogo.style.visibility = 'hidden';
                     document.querySelector('.container').style.opacity = '1';
                     document.getElementById('iban').value = '';
-                }, 3000);}
+                }, 3000);
+            }
         }
-
 
         document.getElementById('iban').addEventListener('keypress', function(event) {
             if (event.key === 'Enter') {
@@ -211,7 +208,7 @@
                 document.getElementById('full-screen-logo').style.opacity = '0';
                 document.getElementById('full-screen-logo').style.visibility = 'hidden';
                 document.querySelector('.container').style.opacity = '1';
-            }
+            }   
         });
     </script>
 </body>
