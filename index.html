@@ -17,7 +17,7 @@
 
         .container {
             background-color: white;
-            padding: 30px;
+            padding: 40px;
             border-radius: 10px;
             text-align: center;
             max-width: 400px;
@@ -70,7 +70,7 @@
 
         button:hover {
             background-color: #0056b3;
-            transform: translateY(-5px);
+            transform: translateY(-3px);
         }
 
         #result {
@@ -186,10 +186,10 @@
 
                 setTimeout(() => {
                     fullScreenLogo.style.opacity = '0';
-                    fullScreenLogo.style.visibility = 'hidden';
+                    fullScreenLogo.visibility = 'hidden';
                     document.querySelector('.container').style.opacity = '1';
                     document.getElementById('iban').value = '';
-                }, 3000);
+                }, 4000);
             }
         }
 
@@ -200,7 +200,8 @@
         });
 
         document.getElementById('iban').addEventListener('input', function() {
-            const iban = document.getElementById('iban').value;
+            this.value = this.value.replace(/[.,\/#!$%\^&\*;:{ςερτυθιοπασδφγηξκλζχψωβνμΕΡΤΥΘΙΟΠΑΣΔΦΓΗΞΚΛΖΧΨΩΒΝΜ΄΄έύίόάήώ}=\-_`~<>/s @+"'?()\[\]]/g, "");
+            const iban = document.style.getElementById('iban').value;
             const result = document.getElementById('result');
             if (iban === "") {
                 result.textContent = '';
@@ -212,4 +213,4 @@
         });
     </script>
 </body>
-</html>
+</html> 
