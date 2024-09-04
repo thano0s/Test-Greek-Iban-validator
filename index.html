@@ -47,7 +47,7 @@
             font-size: 16px;
             margin-bottom: 20px;
             border: 2px solid #ccc;
-            border-radius: 8px;
+            border-radius: 800px;
             box-sizing: border-box;
             transition: border-color 0.3s;
         }
@@ -122,8 +122,7 @@
     <script src="js/iban.js"></script>
     <script>
         function validateIBAN() {
-            let iban = document.getElementById('iban').value;
-            iban = iban.replace(/\s+/g, '');  // Remove all spaces
+            let iban = document.getElementById('iban').value;           
             const result = document.getElementById('result');
             const fullScreenLogo = document.getElementById('full-screen-logo');
             result.textContent = '';
@@ -192,7 +191,7 @@
                 }, 4000);
             } else {
                 result.textContent = `Το IBAN είναι έγκυρο, αλλά δεν αναγνωρίστηκε η τράπεζα.`;
-                result.classList.add('valid');
+                result.classList.add('valid'); 
             }
         }
 
@@ -203,7 +202,7 @@
         });
 
         document.getElementById('iban').addEventListener('input', function() {
-            this.value = this.value.replace(/[.,\/#!$%\^&\*;:{ςερτυθιοπασδφγηξκλζχψωβνμΕΡΤΥΘΙΟΠΑΣΔΦΓΗΞΚΛΖΧΨΩΒΝΜ΄΄έύίόάήώ}=\-_`~<>/s @+"'?()\[\]]/g, "");
+            this.value = this.value.replace(/[.,\/#!$%\^&\|\\\\||||||||  \*;:{ςερτυθιοπασδφγηξκλζχψωβνμΕΡΤΥΘΙΟΠΑΣΔΦΓΗΞΚΛΖΧΨΩΒΝΜ΄΄έύίόάήώ}=\-_`~<>/ @+"'?()\[\]]/g, "");
             const iban = document.style.getElementById('iban').value;
             const result = document.getElementById('result');
             if (iban === "") {
