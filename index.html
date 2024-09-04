@@ -202,7 +202,7 @@
         });
 
         document.getElementById('iban').addEventListener('input', function() {
-            this.value = this.value.replace(/[.,\/#!$%\^&\|\\\\||||||||  \*;:{ςερτυθιοπασδφγηξκλζχψωβνμΕΡΤΥΘΙΟΠΑΣΔΦΓΗΞΚΛΖΧΨΩΒΝΜ΄΄έύίόάήώ}=\-_`~<>/ @+"'?()\[\]]/g, "");
+            this.value = this.value.replace(/[.,\/#!$%\^&\|\\\\||||||||  \*;:{ςερτυ¨¨θιοπασδφγηξκλζχψωβνμΕΡΤΥΘΙΟΠΑΣΔΦΓΗΞΚΛΖΧΨΩΒΝΜ΄΄έύίόάήώ}=\-_`~<>/ @+"'?()\[\]]/g, "");
             const iban = document.style.getElementById('iban').value;
             const result = document.getElementById('result');
             if (iban === "") {
