@@ -203,7 +203,7 @@
 
         document.getElementById('iban').addEventListener('input', function() {
             this.value = this.value.replace(/[.,\/#!$%\^&\|\\\\||||||||  \*;:{ςερτυ¨¨¨"θιοπασδφγηξκλζχψωβνμΕΡΤΥΘΙΟΠΑΣΔΦΓΗΞΚΛΖΧΨΩΒΝΜ΄΄έύίόάήώ}=\-_`~<>/ @+"'?()\[\]]/g, "");
-            const iban = document.style.getElementById('iban').value;
+            const iban = document.getElementById('iban').value;
             const result = document.getElementById('result');
             if (iban === "") {
                 result.textContent = '';
